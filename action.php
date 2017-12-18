@@ -1,6 +1,6 @@
 <?php
 session_start();
-$link = mysqli_connect("127.0.0.1", "root", "", "trial");
+$link = mysqli_connect("127.0.0.1", "root", "", "Social");
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -32,7 +32,7 @@ if($query->num_rows>0){ echo "Already another account with the same email exists
 
         $_SESSION['user_email'] = $_POST['email'];header('Location: view.php');
       }
- } 
+ }
 if(isset($_POST['submit']))
 {
 	SignUp();

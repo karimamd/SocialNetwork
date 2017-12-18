@@ -65,3 +65,8 @@ input[type=submit]:hover {
   font-size: 100px;
   font-family: Verdana,sans-serif;
 }
+.genderlabel
+{
+
+  font-size:50px;
+}
