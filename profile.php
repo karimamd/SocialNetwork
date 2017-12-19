@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $_SESSION["ProfileID"] = 1;
+  //$_SESSION["ProfileID"] = 1;
   require 'SQLconnect.php';
   $conn = openConnection();
   $id = $_SESSION["ProfileID"];
