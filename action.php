@@ -6,7 +6,7 @@ function SignUp() {
     global $link;
     $email=$_POST["Email"];
 	$query=$link->query("SELECT * FROM Profile WHERE Email = '$email'");
-    if($query->num_rows>0){ 
+    if($query->num_rows>0){
         echo "Already another account with the same email exists.<br/>";
         echo "Please log in. Redirecting after 5 seconds.<br/>";
         header('refresh: 5; url=index.php');

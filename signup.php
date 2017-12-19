@@ -51,6 +51,7 @@
 				<input type = "text" Name ="Email" ID="Email"  placeholder="E-mail" >
 				<br />
 				<input type = "password" Name ="Pass" ID="password" placeholder="Password" >
+
 				<br />
 				<br />
 			  	<input type="radio" name="gender" id="Gender"  value=0/>
