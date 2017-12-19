@@ -113,30 +113,7 @@
 
 								<label style="font-size: 15px;">Year</label>
 								<select name='day' id='blah'>
-								<option value='1947'>1947</option>
-								<option value='1948'>1948</option>
-								<option value='1949'>1949</option>
-								<option value='1950'>1950</option>
-								<option value='1951'>1951</option>
-								<option value='1952'>1952</option>
-								<option value='1953'>1953</option>
-								<option value='1954'>1954</option>
-								<option value='1955'>1955</option>
-								<option value='1956'>1956</option>
-								<option value='1957'>1957</option>
-								<option value='1958'>1958</option>
-								<option value='1959'>1959</option>
-								<option value='1960'>1960</option>
-								<option value='1961'>1961</option>
-								<option value='1962'>1962</option>
-								<option value='1963'>1963</option>
-								<option value='1964'>1964</option>
-								<option value='1965'>1965</option>
-								<option value='1966'>1966</option>
-								<option value='1967'>1967</option>
-								<option value='1968'>1968</option>
-								<option value='1969'>1969</option>
-								<option value='1970'>1970</option>
+   							<option value='1970'>1970</option>
 								<option value='1971'>1971</option>
 								<option value='1972'>1972</option>
 								<option value='1973'>1973</option>
@@ -160,6 +137,18 @@
 								<option value='1991'>1991</option>
 								<option value='1992'>1992</option>
 								<option value='1993'>1993</option>
+								<option value='1988'>1994</option>
+								<option value='1989'>1995</option>
+								<option value='1990'>1996</option>
+								<option value='1991'>1997</option>
+								<option value='1992'>1998</option>
+								<option value='1993'>1999</option>
+								<option value='1989'>2000</option>
+								<option value='1990'>2001</option>
+								<option value='1991'>2002</option>
+								<option value='1992'>2003</option>
+								<option value='1993'>2004</option>
+
 								</select>
 
 				    </div>
