@@ -26,7 +26,7 @@
 				<div class="inner">
 				<center>
 				<h2>Log in to your Account</h2>
-				<input type = "text" Name ="email" ID="email"  placeholder="Email" >
+				<input type = "text" Name ="Email" ID="Email"  placeholder="Email" >
 								<br />
 				<input type = "password" Name ="password" ID="password" placeholder="Password" >
 
