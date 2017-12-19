@@ -8,6 +8,7 @@
 				var password=document.getElementById("password").value;
 				var fname= document.getElementById("fname").value;
 				var lname= document.getElementById("lname").value;
+				var nname= document.getElementById("nname").value;
 				var ck_name = /^[A-Za-z0-9 ]{3,20}$/;
 				var ck_password =  /^[A-Za-z0-9!@#$%^&*()_]{6,20}$/;
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -28,6 +29,10 @@
 					alert("Enter a valid lname! ");
 					return false;
 				}
+				if(nname==null || nname=="")
+				{
+					nname= fname.concat("_"+lname);
+				}
 					else return true;
 				}
 		</script>
@@ -46,7 +51,6 @@
 				<input type = "text" Name ="email" ID="email"  placeholder="E-mail" >
 				<br />
 				<input type = "password" Name ="password" ID="password" placeholder="Password" >
-				<input type = "password" Name ="confirm" ID="confirm" placeholder="Confirm Password" >
 				<br />
 				<br />
 			  <input type="radio" name="genderM" id="gender"  value="male"/>
