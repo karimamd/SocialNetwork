@@ -36,6 +36,11 @@ output of `git branch` to stdin of `grep \*`
 	git checkout -b [BRANCH_NAME]
 ```
 
+### Delete an branch
+
+```
+	git branch -D [BRANCH_NAME]
+```
 ### Push current working branch to online server
 
 ```
