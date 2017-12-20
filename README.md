@@ -36,7 +36,7 @@ output of `git branch` to stdin of `grep \*`
 	git checkout -b [BRANCH_NAME]
 ```
 
-### Delete an branch
+### Delete a branch
 
 ```
 	git branch -D [BRANCH_NAME]
