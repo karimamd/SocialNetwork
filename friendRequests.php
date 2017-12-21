@@ -7,16 +7,22 @@ require 'SQLconnect.php';
 $conn = openConnection();
 //select FriendRequest sent to this user
 //$sql = "SELECT ProfileID_1, Nick FROM FriendRequest WHERE ProfileID_2 = $_SESSION["ProfileID"]";
-$sql = "SELECT Nick, ProfileID_1 FROM FriendRequest NATURAL JOIN Profile WHERE FriendRequest.ProfileID_1=Profile.ProfileID AND
-ProfileID_2 = 2";
+$sql = "SELECT Nick, ProfileID_1,ProfilePic FROM FriendRequest NATURAL JOIN
+Profile WHERE FriendRequest.ProfileID_1=Profile.ProfileID AND ProfileID_2 = 2";
 $result = $conn->query($sql);
 //if there are friend requests sent to this user
 if ($result->num_rows > 0) {
 
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<a href='profile.php'>". $row["Nick"] ."</a><br>";
-        //TODO need to add 2 buttons to accept or cancel request
+        echo '<img height="55" width="55" style="border-radius:50%"
+        class="profileImage" src="data:image/jpeg;base64,'.base64_encode($row['ProfilePic']).'"/>';
+        $acceptFunction="alert('Accepted!')";
+        $rejectFunction="alert('Rejected!')";
+        echo "<a href='profile.php'>". $row["Nick"] .'</a>
+         <button type="submit"onclick="'. $acceptFunction .'" >Accept Request</button>
+         <button type="submit"onclick="'. $rejectFunction . ' " >Refuse</button><br>';
+
     }
 } else {
     echo "No friend requests pending";
