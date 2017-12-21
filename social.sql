@@ -31,3 +31,12 @@ CREATE TABLE Friend (
   FOREIGN KEY(ProfileID_1) REFERENCES Profile(ProfileID),
   FOREIGN KEY(ProfileID_2) REFERENCES Profile(ProfileID)
 );
+
+CREATE TABLE FriendRequest (
+  ProfileID_1 int(11) NOT NULL,
+  ProfileID_2 int(11) NOT NULL,
+  State int(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY(ProfileID_1, ProfileID_2),
+  FOREIGN KEY(ProfileID_1) REFERENCES Profile(ProfileID),
+  FOREIGN KEY(ProfileID_2) REFERENCES Profile(ProfileID)
+);

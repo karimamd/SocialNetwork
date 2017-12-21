@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
 $link = mysqli_connect("127.0.0.1", "root", "", "social");
-$profileID; $fname; $lname; $email; /*$caption;*/ $result;
+$profileID; $fname; $lname; $email;//DDD  /*$caption;*/ $result;
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -58,4 +58,3 @@ printPosts();
 
 
 ?>
-

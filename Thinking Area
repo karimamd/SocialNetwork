@@ -1,0 +1,4 @@
+added a new table called FriendRequest with ids of sender and receiver
+and State attribute With default value 0 (pending request)
+1 for (Refused) and 2 for (Accepted)
+ 
