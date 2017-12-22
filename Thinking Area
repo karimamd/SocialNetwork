@@ -1,4 +1,24 @@
 added a new table called FriendRequest with ids of sender and receiver
 and State attribute With default value 0 (pending request)
 1 for (Refused) and 2 for (Accepted)
- 
+
+currently thinking of a proper way to accept and refuse friendRequests
+learned that form can send post and get superglobals to send state accepted or refused
+to a page which has a function that acts upon answer but I need to send ID of friend
+and my ID too to be able to do this opereation
+I can send my ID through a session variable
+I but how can I send my friend's ID
+
+I used to send state in the "value" attribute of an input
+and get the value of the the form of name x
+
+but now I can't send that ID which is a PHP variable in html or can I ?
+
+I also failed to make this in the same page or else I would probably need ajax
+
+I cannot send ID of friend through session because I show data by iteration so
+session will be updated each time until it reaches last ID in friendRequests
+but button won't be specific to this friend
+
+one last solution will be to make accept and refuse buttons on the requested profile only
+if everything else didn't work
