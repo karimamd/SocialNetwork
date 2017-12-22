@@ -16,4 +16,6 @@ $conn->query($deleteSQL);
 
 //need to redirect to friendRequests page
 $conn->close();
+header("Location: /SocialNetwork/friendRequests.php"); /* Redirect browser */
+exit();
 ?>

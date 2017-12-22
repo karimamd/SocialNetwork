@@ -14,7 +14,6 @@ $sql = "SELECT Nick, ProfileID_1,ProfileID_2,ProfilePic,State FROM FriendRequest
 Profile WHERE FriendRequest.ProfileID_1=Profile.ProfileID AND ProfileID_2 = 2";
 $result = $conn->query($sql);
 
-echo $result->num_rows;
 //if there are friend requests sent to this user
 if ($result->num_rows > 0) {
 
