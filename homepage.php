@@ -38,41 +38,47 @@ function confirmPost(){
 	$query=$link->query("INSERT INTO `post` (`Caption`, `Image`, `isPublic`, `ProfileID`) VALUES
 ('$_POST[post]', NULL, b'$is_Public','$theID')");
 
-	echo"<script>
-$( '#post_wall' ).load( 'homepage.php #post_wall' );
-function() {
-  alert( 'Load was performed.' );
-});
-</script>";
 	//printPosts();
 }
 
 function printPosts(){
 	global $link,$profileID,$caption;
-
-	$query2=$link->query("(Select Fname, Lname, Caption, PostTime from Profile NATURAL JOIN POST where ProfileID='$profileID') UNION (Select Fname, Lname, Caption, PostTime from Profile NATURAL JOIN (Select ProfileID,Caption, PostTime from POST where ProfileID=(Select ProfileID_2 from Friend where ProfileID_1='$profileID' AND isPublic=1)) AS T) order by PostTime desc");
-echo "<br>Posts<br>";
+$stylish_border=0;
+	$query2=$link->query("(Select Fname, Lname, Caption, ProfilePic, PostTime from Profile NATURAL JOIN POST where ProfileID!='$profileID' AND isPublic=1) UNION
+	(Select Fname, Lname, Caption, ProfilePic, PostTime from Profile NATURAL JOIN POST where ProfileID='$profileID')  UNION
+	(Select Fname, Lname, Caption, ProfilePic, PostTime from Profile NATURAL JOIN (Select ProfileID,Caption,PostTime from POST where ProfileID=(Select Distinct ProfileID_2 from Friend where isPublic=0 AND ProfileID_1='$profileID')) AS T)order by PostTime desc");
 echo "<div id='post_wall'>";
 while($capt=$query2->fetch_row()){
 	$text=convertText($capt[2]);
-	echo "<p style='font-family:verdana;font-size:125%;'>".$capt[0]." ".$capt[1]." wrote:	" .$text."</p>";//$funcky_text;
-	echo "</br>";
+	
+	//echo "</br>";
+	echo "<div  id='post_entity'";
+	if($stylish_border% 2==0)
+		echo " style='border-right:3px solid #af7f1099'>";
+	else
+		echo " style='border-left:3px solid #af7f1099'>";
+
+		if($capt[3]) echo '<img height="40" width="40" style="margin-right:0.5em;vertical-align:middle;border-radius:50%" src="data:image/png;base64,'.base64_encode( $capt[3] ).'"/>';
+		echo '<b>'.$capt[0]." ".$capt[1].":	".'</b>'.$text."</div>";//$funcky_text;
+$stylish_border++;
 }
 echo "</div>";
 }
 init();
 
+ echo "<div class='topnav'>
+  <a href='#'>Link</a>
+  <a href='#'>Link</a>
+  <a href='#'>Link</a>
+</div>" 
  ?>
-
+<style>
+<?php include 'main.css'; ?>
+</style>
 
 
 <?php
-
-
- echo "<h1>Sweet Home."." ".$fname." ".$lname."</h1>";
- echo "</br>";
- echo "<h2>"."Email is: ".$email."</h2>";
- post();
+ post($fname,$lname);
 printPosts();
 
 if(isset($_POST['submit']))
@@ -84,4 +90,5 @@ if(isset($_POST['submit']))
 
 
 ?>
+
 
