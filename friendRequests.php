@@ -26,7 +26,9 @@ if ($result->num_rows > 0) {
         class="profileImage" src="data:image/jpeg;base64,'.base64_encode($row['ProfilePic']).'"/>';
         // $acceptFunction="alert('Accepted!')";
         // $rejectFunction="alert('Rejected!')";
-        echo "<a href='profile.php'>". $row["Nick"] .'</a>';
+        echo "<a href='profile.php/?id=" . $requesterID . "'>". $row["Nick"] .'</a>';
+        //can get it from profile page using :
+        //if(isset($_GET['id'])){$_SESSION['id'] = $_GET['id'];}
         $buttons='<form action="acceptFriendRequest.php" method="get">
         <button type="submit" name="friendRequest" value="'.$requesterID.'">Accept Request </form>
 
@@ -36,6 +38,7 @@ if ($result->num_rows > 0) {
         echo $buttons;
         //  '<a class="buttonLink" href="function.php?hello=true">Accept Request</a>
         //  <a class="buttonLink" href="function.php?hello=false">Refuse</a><br>';
+        //TODO make it equal to current profile ID
          $_SESSION['ProfileID'] = 2;
        }
       //  else {
