@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 
         <form action="refuseFriendRequest.php" method="get">
         <button type="submit" name="friendRequest" value="'.$requesterID.'">Refuse
-        </button></form>';
+        </button></form><br><br>';
         echo $buttons;
         //  '<a class="buttonLink" href="function.php?hello=true">Accept Request</a>
         //  <a class="buttonLink" href="function.php?hello=false">Refuse</a><br>';
