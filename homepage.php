@@ -1,7 +1,11 @@
+<style>
+<?php include 'bar.css'; ?>
+</style>
 <?php 
 session_start();
 include('emo.php');
 include('postWall.php');
+include('upper_bar.php');
 $link = mysqli_connect("127.0.0.1", "root", "", "social");
 mysqli_set_charset($link, "utf8mb4");
 $profileID; $fname; $lname; $email; /*$caption;*/ $result;
@@ -25,6 +29,7 @@ function init(){
   $lname=$result[1];
   $email=$result[2];
   $profileID=$result[3];
+  upper_bar();
 
 }
 function confirmPost(){
@@ -44,9 +49,9 @@ function confirmPost(){
 function printPosts(){
 	global $link,$profileID,$caption;
 $stylish_border=0;
-	$query2=$link->query("(Select Fname, Lname, Caption, ProfilePic, PostTime from Profile NATURAL JOIN POST where ProfileID!='$profileID' AND isPublic=1) UNION
-	(Select Fname, Lname, Caption, ProfilePic, PostTime from Profile NATURAL JOIN POST where ProfileID='$profileID')  UNION
-	(Select Fname, Lname, Caption, ProfilePic, PostTime from Profile NATURAL JOIN (Select ProfileID,Caption,PostTime from POST where ProfileID=(Select Distinct ProfileID_2 from Friend where isPublic=0 AND ProfileID_1='$profileID')) AS T)order by PostTime desc");
+	$query2=$link->query("(Select Fname, Lname, Caption, ProfilePic, Image, PostTime from Profile NATURAL JOIN POST where ProfileID!='$profileID' AND isPublic=1) UNION
+	(Select Fname, Lname, Caption, ProfilePic, Image, PostTime from Profile NATURAL JOIN POST where ProfileID='$profileID')  UNION
+	(Select Fname, Lname, Caption, ProfilePic, Image, PostTime from Profile NATURAL JOIN (Select ProfileID,Caption, Image, PostTime from POST where ProfileID=(Select Distinct ProfileID_2 from Friend where isPublic=0 AND ProfileID_1='$profileID')) AS T)order by PostTime desc");
 echo "<div id='post_wall'>";
 while($capt=$query2->fetch_row()){
 	$text=convertText($capt[2]);
@@ -59,18 +64,19 @@ while($capt=$query2->fetch_row()){
 		echo " style='border-left:3px solid #af7f1099'>";
 
 		if($capt[3]) echo '<img height="40" width="40" style="margin-right:0.5em;vertical-align:middle;border-radius:50%" src="data:image/png;base64,'.base64_encode( $capt[3] ).'"/>';
-		echo '<b>'.$capt[0]." ".$capt[1].":	".'</b>'.$text."</div>";//$funcky_text;
+		echo '<b>'.$capt[0]." ".$capt[1].":	".'</b>'.$text;
+		if($capt[4])
+			echo '</br><hr><img style="max-width:430;max-height:500;display:block;margin:auto;" src="data:image/png;base64,'.base64_encode( $capt[4] ).'"/>'."</div>";//$funcky_text;
+		else
+			echo '</div>';
 $stylish_border++;
 }
 echo "</div>";
 }
 init();
 
- echo "<div class='topnav'>
-  <a href='#'>Link</a>
-  <a href='#'>Link</a>
-  <a href='#'>Link</a>
-</div>" 
+
+ 
  ?>
 <style>
 <?php include 'main.css'; ?>
