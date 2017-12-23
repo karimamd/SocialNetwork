@@ -19,8 +19,8 @@ if (!$link) {
 
 function init(){
   global $link, $fname, $lname, $email,$profileID, $numberPosts_1, $caption;
-
-  $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where Profile.Email='yuri.z@gmail.com'");
+echo $_SESSION['ProfileID'];
+  $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where ProfileID=".$_SESSION['ProfileID']);
 
   $result=$query->fetch_row();
   echo "<script type='text/javascript'> function showStuff() {
@@ -53,7 +53,7 @@ function confirmPost(){
 
 	//echo "the id is: ".$profileID;
 	$theID=$profileID;
-	$query=$link->query("INSERT INTO `post` (`Caption`, `Image`, `isPublic`, `ProfileID`) VALUES
+	$query=$link->query("INSERT INTO `POST` (`Caption`, `Image`, `isPublic`, `ProfileID`) VALUES
 ('$_POST[post]', NULL, b'$is_Public','$theID')");
 
 	//printPosts();

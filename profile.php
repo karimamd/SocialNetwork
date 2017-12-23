@@ -1,15 +1,19 @@
+
 <?php
   session_start();
-  /*$_SESSION["ProfileID"] = 1;
-  $_SESSION["Visit"] = 0; for help*/
-  $profileID = $_SESSION["ProfileID"];
-  $visitID = $_SESSION["Visit"];
-
   require 'SQLconnect.php';
   $conn = openConnection();
 
-  if($_SESSION["Visit"] != 0) {
-    $id = $_SESSION["Visit"];
+  if(isset($_GET['id'])) {
+    $visitID = $_GET['id'];
+  } else {
+    $visitID = 0;
+  }
+
+  $profileID = $_SESSION["ProfileID"];
+
+  if($visitID != 0) {
+    $id = $visitID;
   }
   else {
     $id = $_SESSION["ProfileID"];
@@ -17,10 +21,10 @@
 
   /* determine whether you visit your friend's profile or a stranger's one*/
   $friends = 0;
-  if($_SESSION["Visit"] != 0) {
-    $sqlFriends1 = "SELECT ProfileID_2 FROM friend WHERE ProfileID_1 = '$profileID' AND ProfileID_2 = '$visitID'";
+  if($visitID != 0) {
+    $sqlFriends1 = "SELECT ProfileID_2 FROM Friend WHERE ProfileID_1 = '$profileID' AND ProfileID_2 = '$visitID'";
     $friends1 = mysqli_query($conn, $sqlFriends1);
-    $sqlFriends2 = "SELECT ProfileID_1 FROM friend WHERE ProfileID_2 = '$profileID' AND ProfileID_1 = '$visitID'";
+    $sqlFriends2 = "SELECT ProfileID_1 FROM Friend WHERE ProfileID_2 = '$profileID' AND ProfileID_1 = '$visitID'";
     $friends2 = mysqli_query($conn, $sqlFriends2);
     if(mysqli_num_rows($friends1) == 1)
       $friends = 1;
@@ -29,7 +33,7 @@
     }
   }
 
-  $sql1 = "SELECT Fname, Lname, Nick, BirthDate, ProfilePic, Hometown, Gender, Marital, AboutMe FROM profile WHERE ProfileID = '$id'";
+  $sql1 = "SELECT Fname, Lname, Nick, BirthDate, ProfilePic, Hometown, Gender, Marital, AboutMe FROM Profile WHERE ProfileID = '$id'";
   $profile = mysqli_query($conn, $sql1);
   $row1 = mysqli_fetch_array($profile);
 
@@ -55,23 +59,26 @@
     $gender = "Female";
   }
 
-  if($_SESSION["Visit"] == 0 || $friends == 1)  {
-    $sqlPosts = "SELECT * FROM post WHERE ProfileID = '$id' ORDER BY PostTime DESC";
+  if($visitID == 0 || $friends == 1)  {
+    $sqlPosts = "SELECT * FROM POST WHERE ProfileID = '$id' ORDER BY PostTime DESC";
   }
   else {
-    $sqlPosts = "SELECT * FROM post WHERE ProfileID = '$id' AND IsPublic = 1 ORDER BY PostTime DESC";
+    $sqlPosts = "SELECT * FROM POST WHERE ProfileID = '$id' AND IsPublic = 1 ORDER BY PostTime DESC";
   }
 
   $posts = mysqli_query($conn, $sqlPosts);
 
   $conn->close();
 ?>
+<style>
+<?php include 'style.css'; ?>
+</style>
 
 <html>
   <head>
     <title>Profile</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+<!--    <link rel="stylesheet" href="style.css"> -->
   </head>
   <body>
     <div id="header">
@@ -98,7 +105,7 @@
       </div>
       <div id="sendRequest">
         <?php
-        if($_SESSION["Visit"] != 0 && $friends == 0) {
+        if($visitID != 0 && $friends == 0) {
           echo '<form action="profileNew.php"> <input type="submit" value="Send Friend Request" /> </form>';
         }
         ?>
@@ -114,13 +121,13 @@
         if(!is_null($hometown) && $hometown != "")
           echo "Hometown: " . $hometown . "<br />";
 
-        if($_SESSION["Visit"] == 0 || $friends == 1) {
+        if($visitID == 0 || $friends == 1) {
           echo "Birthdate: " . $birthdate . "<br />";
           if(!is_null($aboutMe) && $aboutMe != "")
             echo "<br /> About Me: <br />" . $aboutMe . "<br />";
         }
 
-        if($_SESSION["Visit"] == 0) {
+        if($visitID == 0) {
           echo "<br /> <form id='more' action='indexMore.php' method='post'><input type='submit' value='Edit Profile' /></form>";
         }
       ?>
@@ -128,7 +135,7 @@
 
     <div id="Timeline">
       <?php
-        if($_SESSION["Visit"] == 0) {
+        if($visitID == 0) {
           echo '
           <div id="newPost">
             <form action="profileNew.php" method="post">

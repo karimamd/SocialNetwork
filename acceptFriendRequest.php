@@ -20,7 +20,7 @@ $conn->query($deleteSQL);
 
 //need to redirect to friendRequests page
 $conn->close();
-header("Location: /friendRequests.php"); /* Redirect browser */
+header("Location: friendRequests.php"); /* Redirect browser */
 exit();
 
 ?>
