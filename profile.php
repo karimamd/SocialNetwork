@@ -1,7 +1,7 @@
 <?php
   session_start();
   /*$_SESSION["ProfileID"] = 1;
-  $_SESSION["Visit"] = 0;*/
+  $_SESSION["Visit"] = 0; for help*/
   $profileID = $_SESSION["ProfileID"];
   $visitID = $_SESSION["Visit"];
 
