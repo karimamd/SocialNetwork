@@ -83,6 +83,7 @@ a:hover {
   cursor: pointer;
 }
 
+button,
 input {
   background-image: none;
   border: 0;
@@ -95,6 +96,7 @@ input {
   transition: background-color 0.3s;
 }
 
+button,
 input[type='submit'] {
   cursor: pointer;
 }
@@ -141,6 +143,7 @@ input[type='submit'] {
 .login label,
 .login input[type='text'],
 .login input[type='password'],
+button,
 input[type='submit'] {
   border-radius: 0.25rem;
   padding: 16px;
@@ -178,6 +181,7 @@ input[type='submit'] {
   width: 100%;
 }
 
+button,
 input[type='submit'] {
   background-color: #ea4c88;
   color: #eee;
@@ -185,6 +189,8 @@ input[type='submit'] {
   text-transform: uppercase;
 }
 
+button:focus,
+button:hover,
 input[type='submit']:focus,
 input[type='submit']:hover {
   background-color: #d44179;
@@ -463,6 +469,12 @@ input[type=radio]:checked + label {
   position: relative;
   font-weight: 550;
   font-size: 16px;
+}
+
+.delete {
+  left: calc(35vw);
+  top: calc(-10vh);
+  position: relative;
 }
 
 .postsCaption {

@@ -8,7 +8,7 @@ $conn = openConnection();
 //select FriendRequest sent to this user
 //$sql = "SELECT ProfileID_1, Nick FROM FriendRequest WHERE ProfileID_2 = $_SESSION["ProfileID"]";
 //INSERT INTO FriendRequest (ProfileID_1,ProfileID_2) VALUES (1,2);
-$sql = "SELECT Nick, ProfileID_1,ProfileID_2,ProfilePic,State FROM FriendRequest NATURAL JOIN
+$sql = "SELECT Fname, Lname, ProfileID_1,ProfileID_2,ProfilePic,State FROM FriendRequest NATURAL JOIN
 Profile WHERE FriendRequest.ProfileID_1=Profile.ProfileID AND ProfileID_2 =".$_SESSION["ProfileID"];
 $result = $conn->query($sql);
 
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
         class="profileImage" src="data:image/jpeg;base64,'.base64_encode($row['ProfilePic']).'"/>';
         // $acceptFunction="alert('Accepted!')";
         // $rejectFunction="alert('Rejected!')";
-        echo "<a href='profile.php/?id=" . $requesterID . "'>". $row["Nick"] .'</a>';
+        echo "<a href='profile.php/?id=" . $requesterID . "'>". $row["Fname"] . " " . $row["Lname"] .'</a>';
         //can get it from profile page using :
         //if(isset($_GET['id'])){$_SESSION['id'] = $_GET['id'];}
         $buttons='<form action="acceptFriendRequest.php" method="get">

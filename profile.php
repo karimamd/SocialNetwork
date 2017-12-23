@@ -22,7 +22,7 @@
     $id = $_SESSION["ProfileID"];
   }
 
-  /* determine whether you visit your friend's profile or a stranger's one*/
+  /* determine whether you visit your friend's profile or not */
   $friends = 0;
   if($visitID != 0) {
     $sqlFriends1 = "SELECT ProfileID_2 FROM Friend WHERE ProfileID_1 = '$profileID' AND ProfileID_2 = '$visitID'";
@@ -34,6 +34,24 @@
     else if(mysqli_num_rows($friends2) == 1) {
       $friends = 1;
     }
+  }
+
+  /* if you aren't visiting your friend, then maybe you've sent him a request */
+  $sentRequest = 0;
+  if($visitID != 0 && $friends == 0) {
+    $sqlSentRequest = "SELECT ProfileID_2 FROM FriendRequest WHERE ProfileID_1 = '$profileID' AND ProfileID_2 = '$visitID'";
+    $sent = mysqli_query($conn, $sqlSentRequest);
+    if(mysqli_num_rows($sent) == 1)
+      $sentRequest = 1;
+  }
+
+  /* if you aren't visiting your friend and you haven't sent him a request, then maybe he has sent you the request */
+  $receivedRequest = 0;
+  if($visitID != 0 && $friends == 0 && $sentRequest == 0) {
+    $sqlreceivedRequest = "SELECT ProfileID_1 FROM FriendRequest WHERE ProfileID_2 = '$profileID' AND ProfileID_1 = '$visitID'";
+    $received = mysqli_query($conn, $sqlreceivedRequest);
+    if(mysqli_num_rows($received) == 1)
+      $receivedRequest = 1;
   }
 
   $sql1 = "SELECT Fname, Lname, Nick, BirthDate, ProfilePic, Hometown, Gender, Marital, AboutMe FROM Profile WHERE ProfileID = '$id'";
@@ -88,12 +106,7 @@
     <div id="ProfileHeader">
       <div id="profileImage">
         <?php
-            /*if(!is_null($row1['ProfilePic']))*/
-              echo '<img class="profileImage" src="data:image/jpeg;base64,'.base64_encode($row1['ProfilePic']).'"/>';
-            /*else if($row1['Gender'] == 0)
-              echo '<img class="profileImage" src="default/Male.png" />';
-            else
-              echo '<img class="profileImage" src="default/Female.png" />';*/
+          echo '<img class="profileImage" src="data:image/jpeg;base64,'.base64_encode($row1['ProfilePic']).'"/>';
         ?>
       </div>
       <div id="profileInfo">
@@ -107,7 +120,17 @@
       <div id="sendRequest">
         <?php
         if($visitID != 0 && $friends == 0) {
-          echo '<form action="profileNew.php"> <input type="submit" value="Send Friend Request" /> </form>';
+          if($sentRequest == 1);
+          else if($receivedRequest == 1) {
+            echo '<form action="http://localhost/SocialNetwork/acceptFriendRequest.php" method="get">
+            <button type="submit" name="friendRequest" value="' . $visitID . '">Accept Request </button> </form>';
+
+            echo '<form action="http://localhost/SocialNetwork/refuseFriendRequest.php" method="get">
+            <button type="submit" name="friendRequest" value="' . $visitID . '">Refuse Request </button> </form>';
+          }
+          else
+            echo '<form action="http://localhost/SocialNetwork/sendFriendRequest.php" method="get">
+            <button type="submit" name="friendRequest" value="' . $visitID . '">Send Friend Request </button> </form>';
         }
         ?>
       </div>
@@ -152,15 +175,22 @@
         <?php
           while($row2 = mysqli_fetch_array($posts)) {
             echo '<div id="profilePosts">';
-            if(!is_null($row1['ProfilePic']))
+            //if(!is_null($row1['ProfilePic']))
               echo '<img class="ppInPosts" src="data:image/jpeg;base64,'.base64_encode($row1['ProfilePic']).'"/>';
-            else if($row1['Gender'] == 0)
+        /*    else if($row1['Gender'] == 0)
               echo '<img class="ppInPosts" src="default/Male.png" />';
             else
               echo '<img class="ppInPosts" src="default/Female.png" />';
+        */
 
             echo "<div class='poster'>" . $name . "<br />";
             echo $row2['PostTime'] . "</div>";
+
+            if($visitID == 0) {
+              echo '<div class="delete"> <form action="http://localhost/SocialNetwork/deletePost.php" method="get">
+              <button type="submit" name="deletePost" value="' . $row2['PostID'] . '">X </button> </form> </div>';
+            }
+
             echo "<div class='postsCaption'>" . $row2['Caption'] . "<br />";
             if(!is_null($row2['Image']))
               echo '<img class="postsImage" src="data:image/jpeg;base64,'.base64_encode($row2['Image']).'"/>' . '<br />';
