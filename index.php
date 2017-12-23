@@ -54,7 +54,7 @@
   <!-- end of jQuery code -->
 </head>
 
-<body>
+<body id="index">
 
   <div id="grid1" class="grid">
     <form action="action.php" method="POST" class="form login">
