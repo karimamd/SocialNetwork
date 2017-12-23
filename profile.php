@@ -1,8 +1,11 @@
-
+<style>
+<?php include 'bar.css'; ?>
+</style>
 <?php
   session_start();
   require 'SQLconnect.php';
   $conn = openConnection();
+  include('upper_bar.php');
 
   if(isset($_GET['id'])) {
     $visitID = $_GET['id'];
@@ -81,9 +84,7 @@
 <!--    <link rel="stylesheet" href="style.css"> -->
   </head>
   <body>
-    <div id="header">
-
-    </div>
+<?php upper_bar();?>
     <div id="ProfileHeader">
       <div id="profileImage">
         <?php

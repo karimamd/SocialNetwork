@@ -1,0 +1,10 @@
+git fetch
+git checkout merging
+git pull origin/mergin
+git checkout -b name
+
+
+
+git add .
+git commit -m "commit message"
+git push origin name
