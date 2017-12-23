@@ -19,24 +19,25 @@ if (!$link) {
 
 function init(){
   global $link, $fname, $lname, $email,$profileID, $numberPosts_1, $caption;
-echo $_SESSION['ProfileID'];
+  //echo $_SESSION['ProfileID'];
   $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where ProfileID=".$_SESSION['ProfileID']);
 
   $result=$query->fetch_row();
   echo "<script type='text/javascript'> function showStuff() {
     myspan = document.getElementById('notify_news');
-if (myspan.innerText) {
-	var val=parseInt(myspan.innerText);
-	val++;
-    myspan.innerText = val;
-}
-else
-if (myspan.textContent) {
-		var val=parseInt(myspan.textContent);
-	val++;
+    if (myspan.innerText) {
+	     var val=parseInt(myspan.innerText);
+	      val++;
+        myspan.innerText = val;
+    }
+    else
+      if (myspan.textContent) {
+		    var val=parseInt(myspan.textContent);
+	      val++;
         myspan.textContent = val;
-}}
-</script>";
+      }
+  }
+  </script>";
 
   $fname=$result[0];
   $lname=$result[1];

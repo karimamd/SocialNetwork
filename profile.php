@@ -87,12 +87,12 @@
     <div id="ProfileHeader">
       <div id="profileImage">
         <?php
-            if(!is_null($row1['ProfilePic']))
+            /*if(!is_null($row1['ProfilePic']))*/
               echo '<img class="profileImage" src="data:image/jpeg;base64,'.base64_encode($row1['ProfilePic']).'"/>';
-            else if($row1['Gender'] == 0)
+            /*else if($row1['Gender'] == 0)
               echo '<img class="profileImage" src="default/Male.png" />';
             else
-              echo '<img class="profileImage" src="default/Female.png" />';
+              echo '<img class="profileImage" src="default/Female.png" />';*/
         ?>
       </div>
       <div id="profileInfo">
