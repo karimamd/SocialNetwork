@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-<link rel="stylesheet" href="style.css">
 <?php
 session_start();
 require 'SQLconnect.php';

@@ -1,7 +1,7 @@
 <style>
 <?php include 'bar.css'; ?>
 </style>
-<?php 
+<?php
 session_start();
 include('emo.php');
 include('postWall.php');
@@ -20,10 +20,10 @@ if (!$link) {
 function init(){
   global $link, $fname, $lname, $email,$profileID, $numberPosts_1, $caption;
 
-  $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where Profile.Email='yuri.z@gmail.com'");
- 
+  $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where ProfileID=".$_SESSION['ProfileID']);
+
   $result=$query->fetch_row();
-   
+
 
   $fname=$result[0];
   $lname=$result[1];
@@ -41,7 +41,7 @@ $results=0;
 $var=$_POST['result'];
     $query2=$link->query("Select Fname, Lname, Caption, ProfilePic, Hometown, Email from Profile NATURAL JOIN POST where Fname Like '%" . $var . "%' or Lname Like '%" . $var . "%' or Caption Like '%" . $var . "%'  or Hometown Like '%" . $var . "%'   or Email Like '%" . $var . "%' ");
 //or  or
-       //  
+       //
 echo "<div id='results_wall'>";
 
 while($capt=$query2->fetch_row()){
@@ -73,7 +73,7 @@ echo "</div>";
 init();
 
 
- 
+
  ?>
 <style>
 <?php include 'search.css'; ?>
@@ -92,4 +92,3 @@ printResults();
 
 
 ?>
-
