@@ -16,6 +16,11 @@
   top: calc(15vh);
 }
 
+#grid3 {
+  top: calc(25vh);
+  position: absolute;
+}
+
 .hidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -53,7 +58,7 @@ html {
   height: 100%;
 }
 
-body {
+#index {
   background-color: #2c3338;
   color: #606468;
   font-family: 'Open Sans', sans-serif;
@@ -115,7 +120,6 @@ input[type='submit'] {
   margin-left: 4px;
 }
 
-
 .form__field {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -137,7 +141,7 @@ input[type='submit'] {
 .login label,
 .login input[type='text'],
 .login input[type='password'],
-.login input[type='submit'] {
+input[type='submit'] {
   border-radius: 0.25rem;
   padding: 16px;
   padding: 1rem;
@@ -170,15 +174,19 @@ input[type='submit'] {
   background-color: #434a52;
 }
 
-.login input[type='submit'] {
+.more {
+  width: 100%;
+}
+
+input[type='submit'] {
   background-color: #ea4c88;
   color: #eee;
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.login input[type='submit']:focus,
-.login input[type='submit']:hover {
+input[type='submit']:focus,
+input[type='submit']:hover {
   background-color: #d44179;
 }
 
@@ -247,4 +255,225 @@ input[type=radio]:checked + label {
   border-right: 1px solid #333333;
   border-bottom: 1px solid #333333;
   border-left: 1px solid #CCCCCC;
+
+.select-group #marital {
+  width: 110%;
+  padding: 5px;
+  margin-left: -42px;
+  line-height: 1;
+  border: 0;
+  border-bottom-right-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  height: 51px;
+  font-family: 'Open Sans', sans-serif;
+  color: #9a929e;
+}
+/* Profile Design */
+
+#header {
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 60px;
+  background: #F0F0F0;
+  border: 1px solid #CCC;
+  margin: 0px auto;
+}
+
+#ProfileHeader {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  background-color: #434a52;
+  width: 70%;
+  height: 35vh;
+  top: calc(10vh);
+  left: calc(12vw);
+  position: absolute;
+}
+
+#profileImage {
+  position: absolute;
+  bottom: calc(3vh);
+  left: calc(3vw);
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border: 2px solid white;
+}
+
+#profileInfo {
+  color: white;
+  font-weight: 550;
+  font-size: 30px;
+  position: absolute;
+  bottom: calc(4vh);
+  left: calc(17vw);
+  overflow: hidden;
+}
+
+#sendRequest {
+  right: calc(3vw);
+  position: absolute;
+  bottom: calc(1vh);
+}
+
+#AboutMe {
+  position: absolute;
+  top: calc(46vh);
+  left: calc(12vw);
+  width: 20%;
+}
+
+#Timeline {
+  background-color: #FAFAFA;
+  position: absolute;
+  top: calc(46vh);
+  left: calc(40vw);
+  width: 40%;
+}
+
+#newPost {
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+#profilePosts {
+  background-color: white;
+  width: 98%;
+  position: relative;
+  left: calc(1%);
+  margin-bottom: 5px;
+}
+
+#newPost textarea::-webkit-input-placeholder{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+#newPost textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  left: calc(1%);
+  top: calc(1vh);
+  position: relative;
+  border: none;
+  resize: none;
+  padding: 16px;
+  padding: 1rem;
+  width: 98%;
+  /*height: 176px;*/
+  height: 12rem;
+}
+
+#newPost textarea:focus,
+#newPost textarea:active {
+  outline: none !important;
+}
+
+#more input[type='submit'] {
+  background-color: #3b4148;
+}
+
+#newPost input[type='submit'] {
+  top: calc(20vh);
+  left: calc(30vw);
+  position: absolute;
+  background-color: #3b4148;
+  font-size: 15px;
+  border-radius: 0.25rem;
+  padding-top: 16px;
+  padding-top: 1rem;
+  padding-bottom: 16px;
+  padding-bottom: 1rem;
+  padding-left: 24px;
+  padding-left: 1.5rem;
+  padding-right: 24px;
+  padding-right: 1.5rem;
+}
+
+#more input[type='submit']:hover,
+#more input[type='submit']:focus,
+#newPost input[type='submit']:focus,
+#newPost input[type='submit']:hover {
+  background-color: #434a52;
+}
+
+.checkbox input[type=checkbox] {
+	visibility: hidden;
+}
+
+.checkbox {
+	width: 80px;
+	height: 40px;
+	background: #3b4148;
+	margin: 5px;
+	border-radius: 50px;
+	position: absolute;
+  left: calc(23vw);
+  top: calc(20vh);
+}
+
+.checkbox:before {
+	content: '';
+	position: absolute;
+	top: 19px;
+	left: 10px;
+	height: 2px;
+	width: 60px;
+	background: #111;
+}
+
+.checkbox label {
+	display: block;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+	left: 8px;
+	background: #ddd;
+}
+
+.checkbox input[type=checkbox]:checked + label {
+	left: 49px;
+	background: #26ca28;
+}
+
+.ppInPosts {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  left: calc(3vw);
+  top: calc(1vh);
+  position: relative;
+}
+
+.poster {
+  left: calc(7vw);
+  top: calc(-5vh);
+  position: relative;
+  font-weight: 550;
+  font-size: 16px;
+}
+
+.postsCaption {
+  left: calc(7vw);
+  top: calc(-4vh);
+  position: relative;
+}
+
+.postsImage {
+  left: calc(1vw);
+  top: calc(2vh);
+  position: relative;
+  width: 50%;
+  height: 35%;
 }
