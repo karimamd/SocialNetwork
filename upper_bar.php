@@ -2,8 +2,8 @@
 	function upper_bar(){
 		echo"<ul>
   <li><a class='active' href='homepage.php' >Home</a></li>
-  <li><a href='#' onclick='showStuff()'>News</a><span id='notify_news'class='notification-counter'>15</span></li>
-  <li><a href='friendsReq.php'>Friend Requests</a></li>
+  <li><a href='#' onclick='showStuff()'>Friend Requests</a><span id='notify_news'class='notification-counter'>0</span></li>
+  <li><a href='friendsReq.php'>Data</a></li>
   <li><a href='#about'>About</a></li>
 
  <li>

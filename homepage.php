@@ -19,29 +19,30 @@ if (!$link) {
 
 function init(){
   global $link, $fname, $lname, $email,$profileID, $numberPosts_1, $caption;
-echo $_SESSION['ProfileID'];
+//echo $_SESSION['ProfileID'];
   $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where ProfileID=".$_SESSION['ProfileID']);
-
-  $result=$query->fetch_row();
-  echo "<script type='text/javascript'> function showStuff() {
-    myspan = document.getElementById('notify_news');
-if (myspan.innerText) {
-	var val=parseInt(myspan.innerText);
-	val++;
-    myspan.innerText = val;
-}
-else
-if (myspan.textContent) {
-		var val=parseInt(myspan.textContent);
-	val++;
-        myspan.textContent = val;
-}}
-</script>";
-
-  $fname=$result[0];
+$result=$query->fetch_row();
+$fname=$result[0];
   $lname=$result[1];
   $email=$result[2];
   $profileID=$result[3];
+  $query2=$link->query("Select COUNT( DISTINCT ProfileID) From Profile NATURAL JOIN friendrequest where Profile.ProfileID=friendrequest.ProfileID_1 AND ProfileID_2=".$profileID);
+  $numFrndReq=$query2->fetch_row();
+  echo "<body onload='showStuff()'></body>";
+  echo "<script type='text/javascript'> function showStuff() {
+    myspan = document.getElementById('notify_news');
+if (myspan.innerText) {
+
+
+    myspan.innerText = '$numFrndReq[0]';
+}
+else
+if (myspan.textContent) {
+
+
+    myspan.innerText = '$numFrndReq[0]';
+}}
+</script>";
   upper_bar();
 
 }
@@ -53,7 +54,14 @@ function confirmPost(){
 
 	//echo "the id is: ".$profileID;
 	$theID=$profileID;
-	$query=$link->query("INSERT INTO `POST` (`Caption`, `Image`, `isPublic`, `ProfileID`) VALUES
+$check = getimagesize($_FILES["image"]["tmp_name"]);
+    if($check !== false){
+        $image = $_FILES['image']['tmp_name'];
+        $imgContent = addslashes(file_get_contents($image));
+$query=$link->query("INSERT INTO `POST` (`Caption`, `Image`, `isPublic`, `ProfileID`) VALUES
+('$_POST[post]', '$imgContent', b'$is_Public','$theID')");}
+else
+$query=$link->query("INSERT INTO `POST` (`Caption`, `Image`, `isPublic`, `ProfileID`) VALUES
 ('$_POST[post]', NULL, b'$is_Public','$theID')");
 
 	//printPosts();
@@ -104,8 +112,17 @@ if(isset($_POST['submit']))
 {
 	//echo "YES";
 	confirmPost();
+	//upload_file($link,$)
 }
 
+/*if(isset($_POST['pic_load_submit']))
+{
+	//echo "YES";
+	
+
+}*/
 
 
 ?>
+
+

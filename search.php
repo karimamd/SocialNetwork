@@ -20,7 +20,7 @@ if (!$link) {
 function init(){
   global $link, $fname, $lname, $email,$profileID, $numberPosts_1, $caption;
 
-  $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where Profile.Email='yuri.z@gmail.com'");
+    $query=$link->query("Select Fname, Lname, Email, ProfileID from Profile where ProfileID=".$_SESSION['ProfileID']);
  
   $result=$query->fetch_row();
    
@@ -29,6 +29,23 @@ function init(){
   $lname=$result[1];
   $email=$result[2];
   $profileID=$result[3];
+    $query2=$link->query("Select COUNT( DISTINCT ProfileID) From Profile NATURAL JOIN friendrequest where Profile.ProfileID=friendrequest.ProfileID_1 AND ProfileID_2=".$profileID);
+  $numFrndReq=$query2->fetch_row();
+  echo "<body onload='showStuff()'></body>";
+  echo "<script type='text/javascript'> function showStuff() {
+    myspan = document.getElementById('notify_news');
+if (myspan.innerText) {
+
+
+    myspan.innerText = '$numFrndReq[0]';
+}
+else
+if (myspan.textContent) {
+
+
+    myspan.innerText = '$numFrndReq[0]';
+}}
+</script>";
   upper_bar();
 
 }
@@ -39,7 +56,8 @@ function printResults(){
 $stylish_border=0;
 $results=0;
 $var=$_POST['result'];
-    $query2=$link->query("Select Fname, Lname, Caption, ProfilePic, Hometown, Email from Profile NATURAL JOIN POST where Fname Like '%" . $var . "%' or Lname Like '%" . $var . "%' or Caption Like '%" . $var . "%'  or Hometown Like '%" . $var . "%'   or Email Like '%" . $var . "%' ");
+    $query2=$link->query("(Select Fname, Lname, Caption, ProfilePic, Hometown, Email from Profile NATURAL JOIN POST where Fname Like '%" . $var . "%' or Lname Like '%" . $var . "%' or Caption Like '%" . $var . "%'  or Hometown Like '%" . $var . "%'   or Email Like '%" . $var . "%' ) UNION 
+      (Select Fname, Lname, Null as Caption, ProfilePic, Hometown, Email from Profile  where Fname Like '%" . $var . "%' or Lname Like '%" . $var . "%' or Hometown Like '%" . $var . "%'   or Email Like '%" . $var . "%' )");
 //or  or
        //  
 echo "<div id='results_wall'>";
@@ -52,7 +70,7 @@ while($capt=$query2->fetch_row()){
     else
         echo " style='border-left:3px solid #af7f1099'>";
 if($capt[3]) echo '<img height="40" width="40" style="margin-right:0.5em;vertical-align:middle;border-radius:50%" src="data:image/png;base64,'.base64_encode( $capt[3] ).'"/>';
-        echo '<b>'.$capt[0]." ".$capt[1].": ".'</b>'." found by: ";
+        echo '<b>'.$capt[0]." ".$capt[1].": ".'</b>'." [MATCH] ";
         //echo '<hr>';
         if($capt[0])
 echo '</br><hr>'."First Name: ".$capt[0];
